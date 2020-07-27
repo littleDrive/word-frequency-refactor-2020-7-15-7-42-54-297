@@ -11,15 +11,15 @@ public class WordFrequencyGame {
 
     public static final String SPACE_PATTERN = "\\s+";
     public static final String NEWLINE = "\n";
-    public static final String SPACE = " ";
+    public static final String STRING = " ";
 
-    public String getResult(String inputStr) {
+    public String getResult(String sentence) {
 
-        if (inputStr.split(SPACE_PATTERN).length == 1) {
-            return inputStr + " 1";
+        if (sentence.split(SPACE_PATTERN).length == 1) {
+            return sentence + " 1";
         } else {
             try {
-                String[] arr = inputStr.split(SPACE_PATTERN);
+                String[] arr = sentence.split(SPACE_PATTERN);
 
                 List<Input> inputList = new ArrayList<>();
                 for (String s : arr) {
@@ -40,7 +40,7 @@ public class WordFrequencyGame {
 
                 StringJoiner joiner = new StringJoiner(NEWLINE);
                 for (Input w : inputList) {
-                    String s = w.getValue() + SPACE + w.getWordCount();
+                    String s = w.getValue() + STRING + w.getWordCount();
                     joiner.add(s);
                 }
                 return joiner.toString();
