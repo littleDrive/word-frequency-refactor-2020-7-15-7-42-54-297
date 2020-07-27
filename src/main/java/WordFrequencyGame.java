@@ -13,16 +13,16 @@ public class WordFrequencyGame {
     public static final String NEWLINE = "\n";
     public static final String STRING = " ";
 
-    public String getResult(String sentence) {
+    public String getResult(String inputStr) {
 
-        if (sentence.split(SPACE_PATTERN).length == 1) {
-            return sentence + " 1";
+        if (inputStr.split(SPACE_PATTERN).length == 1) {
+            return inputStr + " 1";
         } else {
             try {
-                String[] arr = sentence.split(SPACE_PATTERN);
+                String[] words = inputStr.split(SPACE_PATTERN);
 
                 List<Input> inputList = new ArrayList<>();
-                for (String s : arr) {
+                for (String s : words) {
                     Input input = new Input(s, 1);
                     inputList.add(input);
                 }
