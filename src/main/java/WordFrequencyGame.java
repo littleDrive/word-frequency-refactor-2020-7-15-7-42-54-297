@@ -8,9 +8,13 @@ import java.io.CharArrayWriter;
 import java.time.LocalDateTime;
 
 public class WordFrequencyGame {
+
+    public static final String SPACE_PATTERN = "\\s+";
+
+    //    private final String SPACE_PATTERN = "\\s+";
     public String getResult(String inputStr) {
 
-        if (inputStr.split("\\s+").length == 1) {
+        if (inputStr.split(SPACE_PATTERN).length == 1) {
             return inputStr + " 1";
         } else {
             try {
