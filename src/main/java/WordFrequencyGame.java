@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 public class WordFrequencyGame {
 
     public static final String SPACE_PATTERN = "\\s+";
+    public static final String NEWLINE = "\n";
 
-    //    private final String SPACE_PATTERN = "\\s+";
     public String getResult(String inputStr) {
 
         if (inputStr.split(SPACE_PATTERN).length == 1) {
             return inputStr + " 1";
         } else {
             try {
-                String[] arr = inputStr.split("\\s+");
+                String[] arr = inputStr.split(SPACE_PATTERN);
 
                 List<Input> inputList = new ArrayList<>();
                 for (String s : arr) {
@@ -37,7 +37,7 @@ public class WordFrequencyGame {
 
                 inputList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
-                StringJoiner joiner = new StringJoiner("\n");
+                StringJoiner joiner = new StringJoiner(NEWLINE);
                 for (Input w : inputList) {
                     String s = w.getValue() + " " + w.getWordCount();
                     joiner.add(s);
