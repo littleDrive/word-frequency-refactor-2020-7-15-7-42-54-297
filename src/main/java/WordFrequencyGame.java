@@ -11,6 +11,7 @@ public class WordFrequencyGame {
 
     public static final String SPACE_PATTERN = "\\s+";
     public static final String NEWLINE = "\n";
+    public static final String SPACE = " ";
 
     public String getResult(String inputStr) {
 
@@ -39,7 +40,7 @@ public class WordFrequencyGame {
 
                 StringJoiner joiner = new StringJoiner(NEWLINE);
                 for (Input w : inputList) {
-                    String s = w.getValue() + " " + w.getWordCount();
+                    String s = w.getValue() + SPACE + w.getWordCount();
                     joiner.add(s);
                 }
                 return joiner.toString();
