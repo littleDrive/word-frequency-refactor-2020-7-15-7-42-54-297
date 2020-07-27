@@ -13,39 +13,46 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) {
 
-        if (sentence.split(SPACE_PATTERN).length == 1) {
-            return sentence + " 1";
-        } else {
             try {
                 String[] words = sentence.split(SPACE_PATTERN);
+                List<WordInfo> wordInfoList = getWordInfoList(words);
+                wordInfoList = getWordInfoListByOrder(wordInfoList);
 
-                List<WordInfo> wordInfoList = new ArrayList<>();
-                for (String word : words) {
-                    WordInfo wordInfo = new WordInfo(word, 1);
-                    wordInfoList.add(wordInfo);
-                }
-
-                Map<String, List<WordInfo>> wordsToList = getListMap(wordInfoList);
-
-                List<WordInfo> wordInfos = new ArrayList<>();
-                for (Map.Entry<String, List<WordInfo>> entry : wordsToList.entrySet()) {
-                    WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
-                    wordInfos.add(wordInfo);
-                }
-                wordInfoList = wordInfos;
-
-                wordInfoList.sort((firstword, secondword) -> secondword.getWordCount() - firstword.getWordCount());
-
-                StringJoiner joiner = new StringJoiner(NEWLINE);
-                for (WordInfo wordInfo : wordInfoList) {
-                    String wordString = wordInfo.getValue() + STRING + wordInfo.getWordCount();
-                    joiner.add(wordString);
-                }
-                return joiner.toString();
+                return getJoinerOfWordInfoList(wordInfoList);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
+    }
+
+    private String getJoinerOfWordInfoList(List<WordInfo> wordInfoList) {
+        StringJoiner joiner = new StringJoiner(NEWLINE);
+        for (WordInfo wordInfo : wordInfoList) {
+            String wordString = wordInfo.getValue() + STRING + wordInfo.getWordCount();
+            joiner.add(wordString);
         }
+        return joiner.toString();
+    }
+
+    private List<WordInfo> getWordInfoListByOrder(List<WordInfo> wordInfoList) {
+
+        List<WordInfo> wordInfos = new ArrayList<>();
+        for (Map.Entry<String, List<WordInfo>> entry : getListMap(wordInfoList).entrySet()) {
+            WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
+            wordInfos.add(wordInfo);
+        }
+        wordInfoList = wordInfos;
+
+        wordInfoList.sort((firstword, secondword) -> secondword.getWordCount() - firstword.getWordCount());
+        return wordInfoList;
+    }
+
+    private List<WordInfo> getWordInfoList(String[] words) {
+        List<WordInfo> wordInfoList = new ArrayList<>();
+        for (String word : words) {
+            WordInfo wordInfo = new WordInfo(word, 1);
+            wordInfoList.add(wordInfo);
+        }
+        return wordInfoList;
     }
 
     private Map<String, List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
